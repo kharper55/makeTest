@@ -12,7 +12,8 @@ BAUD  = 9600UL
 ## A directory for common include files and the simple USART library.
 ## If you move either the current folder or the Library folder, you'll 
 ##  need to change this path to match.
-LIBDIR = ../../AVR-Programming-Library
+LIBDIR = ./src
+# LIBDIR += ./src/peripheralmakmake
 
 ##########------------------------------------------------------##########
 ##########                 Programmer Defaults                  ##########
@@ -97,8 +98,9 @@ all: $(TARGET).hex
 
 debug:
 	@echo
-	@echo "Source files:"   $(SOURCES)
-	@echo "Header files:"   $(HEADERS)
+	@echo "Target name:"       $(TARGET)
+	@echo "Source files:"      $(SOURCES)
+	@echo "Header files:"      $(HEADERS)
 	@echo "MCU, F_CPU, BAUD:"  $(MCU), $(F_CPU), $(BAUD)
 	@echo	
 
