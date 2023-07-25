@@ -19,7 +19,7 @@ PROJDIR := $(CURDIR)
 SOURCEDIR := $(PROJDIR)/src
 BUILDDIR := $(PROJDIR)/build
 
-DIRS = peripheral peripheral1 .
+DIRS = peripheral peripheral1 main .
 SOURCEDIRS = $(foreach dir, $(DIRS), $(addprefix $(SOURCEDIR)/, $(dir)))
 VPATH = $(SOURCEDIRS)
 
@@ -65,8 +65,8 @@ TARGET = $(lastword $(subst /, ,$(CURDIR)))
 #SOURCES=$(wildcard *.c $(LIBDIR)/*.c)
 SOURCES = $(foreach dir,$(SOURCEDIRS),$(wildcard $(dir)/*.c))
 OBJECTS=$(SOURCES:.c=.o)
-#OBJECTS:= $(subst $(SOURCEDIR),$(BUILDDIR),$(SOURCES:.c=.o))
-HEADERS=$(SOURCES:.c=.h)
+#OBJECTS := $(subst $(SOURCES),$(BUILDDIR),$(SOURCES:.c=.o))
+HEADERS = $(SOURCES:.c=.h)
 
 ## Compilation options, type man avr-gcc if you're curious.
 CPPFLAGS = -DF_CPU=$(F_CPU) -DBAUD=$(BAUD) -I. -I$(LIBDIR)

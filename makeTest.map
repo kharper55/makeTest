@@ -375,15 +375,15 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0x634
+.debug_info     0x0000000000000000      0x66c
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 c:/tools/avr/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_info    0x00000000000005f4       0x40 C:/Users/ke126ha/Desktop/testProjects/makeTest/src/./main.o
+ .debug_info    0x00000000000005f4       0x78 C:/Users/ke126ha/Desktop/testProjects/makeTest/src/./main.o
 
-.debug_abbrev   0x0000000000000000      0x5d0
+.debug_abbrev   0x0000000000000000      0x5e6
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 c:/tools/avr/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_abbrev  0x00000000000005a2       0x2e C:/Users/ke126ha/Desktop/testProjects/makeTest/src/./main.o
+ .debug_abbrev  0x00000000000005a2       0x44 C:/Users/ke126ha/Desktop/testProjects/makeTest/src/./main.o
 
 .debug_line     0x0000000000000000       0x87
  *(.debug_line .debug_line.* .debug_line_end)
@@ -394,10 +394,11 @@ END GROUP
  *(.debug_frame)
  .debug_frame   0x0000000000000000       0x24 C:/Users/ke126ha/Desktop/testProjects/makeTest/src/./main.o
 
-.debug_str      0x0000000000000000      0x314
+.debug_str      0x0000000000000000      0x347
  *(.debug_str)
  .debug_str     0x0000000000000000      0x208 c:/tools/avr/avr8-gnu-toolchain/bin/../lib/gcc/avr/7.3.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_str     0x0000000000000208      0x10c C:/Users/ke126ha/Desktop/testProjects/makeTest/src/./main.o
+ .debug_str     0x0000000000000208      0x13f C:/Users/ke126ha/Desktop/testProjects/makeTest/src/./main.o
+                                        0x173 (size before relaxing)
 
 .debug_loc
  *(.debug_loc)
