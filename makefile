@@ -12,8 +12,16 @@ BAUD  = 9600UL
 ## A directory for common include files and the simple USART library.
 ## If you move either the current folder or the Library folder, you'll 
 ##  need to change this path to match.
-LIBDIR = ./src
+LIBDIR = 
 # LIBDIR += ./src/peripheralmakmake
+
+PROJDIR := $(CURDIR)
+SOURCEDIR := $(PROJDIR)/src
+BUILDDIR := $(PROJDIR)/build
+
+DIRS = peripheral peripheral1 .
+SOURCEDIRS = $(foreach dir, $(DIRS), $(addprefix $(SOURCEDIR)/, $(dir)))
+VPATH = $(SOURCEDIRS)
 
 ##########------------------------------------------------------##########
 ##########                 Programmer Defaults                  ##########
@@ -54,8 +62,10 @@ TARGET = $(lastword $(subst /, ,$(CURDIR)))
 #  and in LIBDIR.  If you have any other (sub-)directories with code,
 #  you can add them in to SOURCES below in the wildcard statement.
 
-SOURCES=$(wildcard *.c $(LIBDIR)/*.c)
+#SOURCES=$(wildcard *.c $(LIBDIR)/*.c)
+SOURCES = $(foreach dir,$(SOURCEDIRS),$(wildcard $(dir)/*.c))
 OBJECTS=$(SOURCES:.c=.o)
+#OBJECTS:= $(subst $(SOURCEDIR),$(BUILDDIR),$(SOURCES:.c=.o))
 HEADERS=$(SOURCES:.c=.h)
 
 ## Compilation options, type man avr-gcc if you're curious.
@@ -77,13 +87,16 @@ TARGET_ARCH = -mmcu=$(MCU)
 ## Explicit pattern rules:
 ##  To make .o files from .c files 
 %.o: %.c $(HEADERS) Makefile
-	 $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<;
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $@ $<;
+
+#%.o: %.c $(HEADERS) Makefile
+#	 $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c -o $(BUILDDIR) $<;
 
 $(TARGET).elf: $(OBJECTS)
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ $(LDLIBS) -o $@
 
 %.hex: %.elf
-	 $(OBJCOPY) -j .text -j .data -O ihex $< $@
+	$(OBJCOPY) -j .text -j .data -O ihex $< $@
 
 %.eeprom: %.elf
 	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O ihex $< $@ 
@@ -98,6 +111,7 @@ all: $(TARGET).hex
 
 debug:
 	@echo
+	@echo "Project dir:"       $(PROJDIR)
 	@echo "Target name:"       $(TARGET)
 	@echo "Source files:"      $(SOURCES)
 	@echo "Header files:"      $(HEADERS)
